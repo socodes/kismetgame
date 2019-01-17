@@ -1,0 +1,332 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+int check(char test)
+{
+	if((test=='s') || (test=='r'))
+		return 1;
+	return 0;
+}
+
+int main()
+{
+	int o1,t1,th1,f1,fi1,o2,t2,th2,f2,fi2,round=1,a=1,a2=1; //the dices
+	char again,again2;
+	int d1,d2,counter;
+	int kismet1=0,tscore1=0,kismet2=0,tscore2=0,basic1=0,basic2=0,score1=0,score2=0;
+	srand(time(NULL));
+	
+	while(round<7)
+	{
+		printf("Player 1 - Round %d \n------------------------\n",round);		// following lines generates random numbers for dices. 
+		o1=1+rand()%6;
+		t1= 1 +rand()%6;
+		th1=1+rand()%6;
+		f1=1+rand()%6;
+		fi1=1+rand()%6;
+		printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+		printf("Do you want to get a score or roll a dice (s/r)? ");
+		scanf(" %c",&again);
+		
+		while(check(again) != 1)// if the user enters wrong choice, function works and prints an error.
+		{
+			printf("Error!\nDo you want to get a score or roll a dice (s/r)? ");
+			fflush(stdin);
+			scanf(" %c",&again);
+			
+		}
+		if(again=='r')
+		{
+			a=1;	//a allows user to roll a dice maximum 3 times with the following loop.
+			while(a<=3)
+			{
+				printf("Which dice you would like to roll again (1-5): ");
+				scanf("%d",&d1);
+			
+				if(d1==1)
+				{
+					o1=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+					
+				}
+				else if(d1==2)
+				{
+					t1=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+					
+				}
+				else if(d1==3)
+				{
+					th1=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+					
+				}
+				else if(d1==4)
+				{
+					f1=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+					
+				}
+				else if(d1==5)
+				{
+					fi1=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o1,t1,th1,f1,fi1);
+				}
+				a++;
+				fflush(stdin);
+				printf("Do you want to get a score or roll a dice (s/r)? ");  
+				scanf(" %c",&again);
+				while(check(again) != 1)// if the user enters wrong choice, function works and prints an error.
+				{
+					printf("Error!\nDo you want to get a score or roll a dice (s/r)? ");
+					fflush(stdin);
+					scanf(" %c",&again);
+					
+				}
+				if(again=='s')
+				{
+					a=4;
+						
+				}				
+				else if(a==4)
+				{
+					printf("You cannot roll again!\n");
+					again='s';
+					break;
+				}
+				
+			}
+		}
+		if(again=='s') //score calculations
+		{
+			counter=0,basic1=0;  // following lines calculates the basic score
+			if(round==o1)
+				counter++;
+			if(round==t1)
+				counter++;
+			if(round==th1)
+				counter++;
+			if(round==f1)
+				counter++;
+			if(round==fi1)
+				counter++;
+				
+			basic1=round*counter;
+			tscore1=0;
+			if(o1==1&&t1==1&&th1==1&&f1==1&&fi1==1) // following lines calculates kismet and total score.
+			{
+		        kismet1=55;
+			}
+			else if(o1==2&&t1==2&&th1==2&&f1==2&&fi1==2)
+			{
+		    	kismet1=60;
+			}
+			else if(o1==3&&t1==3&&th1==3&&f1==3&&fi1==3)
+			{
+		        kismet1=65;
+			}
+			else if(o1==4&&t1==4&&th1==4&&f1==4&&fi1==4)
+			{
+		        kismet1=70;
+			}
+			else if(o1==5&&t1==5&&th1==5&&f1==5&&fi1==5)
+			{
+		        kismet1=75;
+		       
+			}
+			else if(o1==6&&t1==6&&th1==6&&f1==6&&fi1==6)
+			{
+		    	kismet1=80;
+			}
+			else if((o1==2 || o1==5) && (t1==2 || t1==5) && (th1==2 || th1==5) && (f1==2 || f1==5) && (fi1==2 || fi1==5) )
+			{
+		        kismet1=35;
+			}
+			
+			else if((o1==1 || o1==6) && (t1==1 || t1==6) && (th1==1 || th1==6) && (f1==1 || f1==6) && (fi1==1 || fi1==6) )
+			{
+		    	kismet1=35;
+			}
+		    else if(o1==1&&t1==2&&th1==3&&f1==4&&fi1==5)
+			{
+		    	kismet1=30;
+			}
+			else if(o1==2&&t1==3&&th1==4&&f1==5&&fi1==6)
+			{
+		    	kismet1=30;
+			}
+			else if((o1==3 || o1==4) && (t1==3 || t1==4) && (th1==3 || th1==4) && (f1==3 || f1==4) && (fi1==3 || fi1==4) )
+			{
+		    	kismet1=35;
+			}
+		    else
+			{
+		        kismet1=o1+t1+th1+f1+fi1;
+			}
+			tscore1=tscore1+kismet1+basic1;
+			score1=score1+tscore1;
+		    printf("Your basic score is %d and your kismet score is %d with a total %d !\n\n",basic1,kismet1,score1);	
+		}
+		printf("Player 2 - Round %d\n------------------------\n",round);   //Player 2's game, almost same with the player 1.		// following lines generates random numbers for dices. 
+		o2=1+rand()%6;
+		t2= 1 +rand()%6;
+		th2=1+rand()%6;
+		f2=1+rand()%6;
+		fi2=1+rand()%6;
+		printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+		printf("Do you want to get a score or roll a dice (s/r)? ");
+		scanf(" %c",&again2);
+		
+		while(check(again2) != 1)// if the user enters wrong choice, function works and prints an error.
+		{
+			printf("Error!\nDo you want to get a score or roll a dice (s/r)? ");
+			fflush(stdin);
+			scanf(" %c",&again2);
+			
+		}
+		
+		if(again2=='r')
+		{
+			a2=1;	//a2 allows user to roll a dice maximum 3 times with the following loop.
+			while(a2<=3)
+			{
+				printf("Which dice you would like to roll again (1-5): ");
+				scanf("%d",&d2);
+				
+				
+			
+				if(d2==1)
+				{
+					o2=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+					
+				}
+				else if(d2==2)
+				{
+					t2=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+					
+				}
+				else if(d2==3)
+				{
+					th2=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+					
+				}
+				else if(d2==4)
+				{
+					f2=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+					
+				}
+				else if(d2==5)
+				{
+					fi2=1+rand()%6;
+					printf("Dice 1: %d\tDice 2: %d\tDice 3: %d\tDice 4: %d\tDice 5: %d\n",o2,t2,th2,f2,fi2);
+				}
+				a2++;
+				fflush(stdin);
+				printf("Do you want to get a score or roll a dice (s/r)? "); 
+				scanf(" %c",&again2);
+			
+				while(check(again2) != 1) // if the user enters wrong choice, function works and prints an error.
+				{
+					printf("Error!\nDo you want to get a score or roll a dice (s/r)? ");
+					fflush(stdin);
+					scanf(" %c",&again2);
+					
+				}
+				
+				if(again2=='s')
+				{
+					a2=4;
+				
+						
+				}				
+				else if(a2==4)
+				{
+					printf("You cannot roll again!\n");
+					again2='s';
+					break;
+				}
+				
+			}
+		}
+		if(again2=='s')
+		{
+			counter=0,basic2=0;
+			if(round==o2)
+				counter++;
+			if(round==t2)
+				counter++;
+			if(round==th2)
+				counter++;
+			if(round==f2)
+				counter++;
+			if(round==fi2)
+				counter++;
+									
+			basic2=round*counter;
+			tscore2=0;
+			if(o2==1&&t2==1&&th2==1&&f2==1&&fi2==1)
+			{
+		        kismet2=55;
+			}
+			else if(o2==2&&t2==2&&th2==2&&f2==2&&fi2==2)
+			{
+		    	kismet2=60;
+			}
+			else if((o2==2 || o2==5) && (t2==2 || t2==5) && (th2==2 || th2==5) && (f2==2 || f2==5) && (fi2==2 || fi2==5) )
+			{
+		        kismet2=35;
+			}
+			else if(o2==3&&t2==3&&th2==3&&f2==3&&fi2==3)
+			{
+		        kismet2=65;
+			}
+			else if(o2==4&&t2==4&&th2==4&&f2==4&&fi2==4)
+			{
+		        kismet2=70;
+			}
+			else if(o2==5&&t2==5&&th2==5&&f2==5&&fi2==5)
+			{
+		        kismet2=75;
+			}
+			else if(o2==6&&t2==6&&th2==6&&f2==6&&fi2==6)
+			{
+		    	kismet2=80;
+			}
+			else if((o2==1 || o2==6) && (t2==1 || t2==6) && (th2==1 || th2==6) && (f2==1 || f2==6) && (fi2==1 || fi2==6) )
+			{
+		    	kismet2=35;
+			}
+		    else if(o2==1&&t2==2&&th2==3&&f2==4&&fi2==5)
+			{
+		    	kismet2=30;
+			}
+			else if(o2==2&&t2==3&&th2==4&&f2==5&&fi2==6)
+			{
+		    	kismet2=30;
+			}
+			else if((o2==3 || o2==4) && (t2==3 || t2==4) && (th2==3 || th2==4) && (f2==3 || f2==4) && (fi2==3 || fi2==4) )
+			{
+		    	kismet2=35;
+			}
+		    else
+			{
+		        kismet2=o2+t2+th2+f2+fi2;
+			}
+			tscore2=tscore2+kismet2+basic2;
+			score2=score2+tscore2;
+		    printf("Your basic score is %d and your kismet score is %d with a total %d !\n\n",basic2,kismet2,score2);
+		}
+
+		round++;
+	}
+	if(score1>score2)
+		printf("THE WINNER IS PLAYER 1");
+	else if(score1<score2)
+		printf("THE WINNER IS PLAYER 2");
+	return 0;
+}
